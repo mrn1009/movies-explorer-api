@@ -7,6 +7,7 @@ const { errors } = require('celebrate');
 const helmet = require('helmet');
 const errorHandler = require('./middlewares/errorHandler');
 const limiter = require('./middlewares/rateLimit');
+const router = require('./routes');
 
 const { PORT = 3000, MONGO = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -27,6 +28,8 @@ app.use(cors({
     'http://localhost:3001',
   ],
 }));
+
+app.use(router);
 
 app.use(errors());
 app.use(errorHandler);
