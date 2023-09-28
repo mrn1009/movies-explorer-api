@@ -28,13 +28,14 @@ app.use(cors({
     'http://localhost:3001',
   ],
 }));
+app.use(requestLogger);
 
 app.use(router);
 
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
-app.use(requestLogger);
-app.use(errorLogger);
+
 app.use(limiter);
 
 mongoose.connect(MONGO);
