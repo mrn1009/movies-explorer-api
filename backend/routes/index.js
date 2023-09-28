@@ -8,10 +8,10 @@ const auth = require('../middlewares/auth');
 
 router.post('/signin', validationLogin, login);
 router.post('/signup', validationCreateUser, createUser);
-router.use('/movies', movieRoutes);
-router.use('/users', userRoutes);
 router.post('/signout', logout);
 router.use(auth);
+router.use('/movies', movieRoutes);
+router.use('/users', userRoutes);
 
 router.use('*', () => {
   throw new NotFoundError('Страница не существует');
