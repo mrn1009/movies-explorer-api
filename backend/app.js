@@ -28,6 +28,7 @@ app.use(cors({
     'http://localhost:3001',
   ],
 }));
+app.use(limiter);
 app.use(requestLogger);
 
 app.use(router);
@@ -36,11 +37,10 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.use(limiter);
-
 mongoose.connect(MONGO);
 
-app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Server is listening on port ${PORT}`);
-});
+app.listen(PORT);
+
+// app.listen(PORT, () => {
+// console.log(`Server is listening on port ${PORT}`);
+// })

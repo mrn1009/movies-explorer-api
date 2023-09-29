@@ -25,7 +25,8 @@ const createUser = (req, res, next) => {
             next(err);
           }
         });
-    });
+    })
+    .catch(next);
 };
 
 const login = (req, res, next) => {
@@ -79,8 +80,6 @@ const getCurrentUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные'));
-      } else if (err.message === 'NotFound') {
-        next(new NotFoundError('Запрашиваемый пользователь не найден'));
       } else {
         next(err);
       }
@@ -97,8 +96,6 @@ const updateProfile = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные'));
-      } else if (err.message === 'Not Found') {
-        next(new NotFoundError('Запрашиваемый пользователь не найден'));
       } else if (err.code === 11000) {
         next(new DuplicateError('Пользователь с таким email уже существует'));
       } else {

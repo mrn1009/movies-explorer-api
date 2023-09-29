@@ -24,8 +24,7 @@ const userSchema = new mongoose.Schema({
   },
 }, { versionKey: false });
 
-// eslint-disable-next-line func-names
-userSchema.methods.toJSON = function () {
+userSchema.methods.toJSON = function checkPassword() {
   const user = this.toObject();
   delete user.password;
   return user;
